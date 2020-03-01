@@ -18,6 +18,14 @@ module.exports = function(env, argv){
       libraryTarget: "umd"
     },
 
+    // resolve: {
+    //   alias: {
+    //     //'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
+    //     'jquery-ui': 'jquery-ui/jquery-ui.js',
+    //     modules: path.join(__dirname, "node_modules"),
+    //   }
+    // },
+
     plugins:[
       new HtmlWebpackPlugin({
         filename: 'intelligence.html',
@@ -46,25 +54,39 @@ module.exports = function(env, argv){
     },
 
     // importing precompiled sass
-    // {
-    //   test: /\.(scss)$/,
-    //   use: [{
-    //     loader: 'style-loader',// inject CSS to page
-    //   },{
-    //     loader: 'css-loader', // translate CSS into CommonJS
-    //   },{
-    //     loader: 'postcss-loader', // Run post css actions
-    //     options: {
-    //       plugins: function(){
-    //         return [
-    //           require('autoprefixer')
-    //         ];
-    //       }
-    //     }
-    //   },{
-    //     loader: 'sass-loader'  // compiles Sass to CSS
-    //   }]
-    // },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
+        }
+        // {
+        //   test: /\.(scss)$/,
+        //   // include: [
+        //   //   path.resolve(__dirname, 'node_modules'),
+        //   //   path.resolve(__dirname, 'src'),
+        //   // ],
+        //   use: [{
+        //     loader: 'style-loader',// inject CSS to page
+        //   },{
+        //     loader: 'css-loader', // translate CSS into CommonJS
+        //   }, {
+        //     loader: 'postcss-loader',
+        //     options: {
+        //       plugins: function () {
+        //         return [
+        //           require('precss'),
+        //           require('autoprefixer'),
+        //         ];
+        //       }
+        //     }
+        //   },{
+        //     loader: 'sass-loader'  // compiles Sass to CSS
+        //   }]
+        // },
+      ]
+    },
+
 
     // importing compiled css
     // import 'bootstrap/dist/css/bootstrap.min.css
